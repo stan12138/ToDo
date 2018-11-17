@@ -2,9 +2,18 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
+        <file>Plan_item.qml</file>
     </qresource>
     <qresource prefix="/icon">
         <file>search_red.png</file>
         <file>close_white.png</file>
+        <file>clock.png</file>
+        <file>clock_small.png</file>
+        <file>alarm.png</file>
+        <file>alarm_small.png</file>
+        <file>delete.png</file>
+        <file>delete_small.png</file>
+        <file>done.png</file>
+        <file>done_small.png</file>
     </qresource>
 </RCC>

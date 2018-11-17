@@ -141,37 +141,60 @@ Window {
 //            color: "#1100ffff"
 //        }
 //    }
-
+    ListModel {
+        id: item_model
+        ListElement {number: 0}
+    }
     Rectangle {
         width: root.width-40
         height: root.height-70
         anchors.centerIn: parent
-        color: "#11ff0000"
+        color: "#11ffff"
+
+
 
         ListView {
             anchors.fill: parent
             anchors.margins: 10
 
             clip: true
-            model: 100
+            model: item_model
             delegate: number_delegate
             spacing: 5
+
+
+
+            MouseArea {
+                z: -1
+                anchors.fill: parent
+                onClicked: {
+                    item_model.append({"number":1})
+                }
+            }
         }
+
 
         Component {
             id: number_delegate
-
-            TextEdit {
-                width: parent.width-20
-                height: paintedHeight+10
-                text: "hello"
-                wrapMode: TextEdit.Wrap
-
-                Rectangle {
-                    anchors.fill: parent
-                    color: "#1100ff00"
-                }
+            Plan_item {
+                width: parent.width
             }
+        }
+    }
+
+    MouseArea {
+        width: root.width-40
+        height: 25
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.bottomMargin: 10
+        anchors.leftMargin: 20
+        Rectangle {
+            anchors.fill: parent
+            color: "#11ff0000"
+        }
+        onClicked: {
+            item_model.append({"number":1})
         }
     }
 
