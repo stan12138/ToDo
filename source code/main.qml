@@ -4,10 +4,10 @@ import QtQuick.Window 2.2
 Window {
     id: root
     visible: true
-    width: 640
-    height: 480
-    title: qsTr("Hello World")
+    width: 370
+    height: 415
 
+    color: "#44222222"
     flags: Qt.Window | Qt.FramelessWindowHint
 
     MouseArea {
@@ -37,28 +37,21 @@ Window {
                 if(-root.y>(root.x+root.width-Screen.width))
                 {
                     //吸附在上边栏
-                    hidden_area.x = (root.x+root.width/2)<=Screen.width/2?(root.x+root.width):(root.x);
+                    hidden_area.x = Math.min(Math.max(0, root.x+root.width/2), Screen.width-hidden_area.width);
                     hidden_area.y = -hidden_area.width/2;
-                    hidden_area.visible = true;
-                    hidden_area.requestActivate();
-                    root.hide();
+                    console.log(Screen.width, Screen.height);
+                    console.log("上边栏",hidden_area.x, hidden_area.y);
                 }
                 else
                 {
                     //吸附在右边栏
-                    if(root.y+root.height/2<=Screen.height/2)
-                    {
-                        hidden_area.y = root.y+root.height;
-                    }
-                    else
-                    {
-                        hidden_area.y = root.y;
-                    }
+                    hidden_area.y = Math.min(Math.max(0, root.y+root.height/2), Screen.height-hidden_area.height);
                     hidden_area.x = Screen.width-hidden_area.width/2;
-                    hidden_area.visible = true
-                    hidden_area.requestActivate();
-                    root.hide()
+//                    console.log("右边栏",hidden_area.x, hidden_area.y);
                 }
+                hidden_area.visible = true
+                hidden_area.requestActivate();
+                root.hide()
             }
 
         }
@@ -69,6 +62,15 @@ Window {
             height: root.height
             anchors.right: parent.right
             cursorShape: Qt.SizeHorCursor
+            property int mx: 0
+            property int my: 0
+            onPressed: {
+                mx = mouseX;
+                my = mouseY;
+            }
+            onPositionChanged: {
+                root.width += mouseX-mx;
+            }
         }
 
         MouseArea {
@@ -77,6 +79,15 @@ Window {
             height: 10
             anchors.bottom: parent.bottom
             cursorShape: Qt.SizeVerCursor
+            property int mx: 0
+            property int my: 0
+            onPressed: {
+                mx = mouseX;
+                my = mouseY;
+            }
+            onPositionChanged: {
+                root.height += mouseY-my;
+            }
         }
 
         MouseArea {
@@ -86,11 +97,22 @@ Window {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             cursorShape: Qt.SizeFDiagCursor
+            property int mx: 0
+            property int my: 0
+            onPressed: {
+                mx = mouseX;
+                my = mouseY;
+            }
+            onPositionChanged: {
+                root.width += mouseX-mx;
+                root.height += mouseY-my;
+                //console.log(root.width, root.height)
+            }
         }
 
     }
 
-    Rectangle {
+    Rectangle { //标题栏
         id: title_rect
         width: root.width
         height: 30
@@ -99,6 +121,7 @@ Window {
     }
 
     Rectangle {
+        //关闭按钮
         width: 20
         height: 20
         id: close_button
@@ -126,43 +149,25 @@ Window {
         }
     }
 
-//    TextEdit {
-//        id: text
-//        color: "#ff0000"
-//        text: "I am here"
-//        textMargin: 6
-//        font.family: "Microsoft YaHei"
-//        anchors.centerIn: parent
-//        width: paintedWidth+12
-//        height: paintedHeight+12
-
-//        Rectangle {
-//            anchors.fill: parent
-//            color: "#1100ffff"
-//        }
-//    }
     ListModel {
         id: item_model
         ListElement {number: 0}
     }
     Rectangle {
+        //清单界面
         width: root.width-40
         height: root.height-70
         anchors.centerIn: parent
-        color: "#11ffff"
-
-
+        color: "#00ffffff"
 
         ListView {
             anchors.fill: parent
             anchors.margins: 10
+            spacing: 5
 
             clip: true
             model: item_model
             delegate: number_delegate
-            spacing: 5
-
-
 
             MouseArea {
                 z: -1
@@ -178,6 +183,12 @@ Window {
             id: number_delegate
             Plan_item {
                 width: parent.width
+                onClick_done: {
+                    item_model.remove(index);
+                }
+                onClick_delete: {
+                    item_model.remove(index);
+                }
             }
         }
     }
@@ -189,10 +200,6 @@ Window {
         anchors.left: parent.left
         anchors.bottomMargin: 10
         anchors.leftMargin: 20
-        Rectangle {
-            anchors.fill: parent
-            color: "#11ff0000"
-        }
         onClicked: {
             item_model.append({"number":1})
         }
@@ -201,8 +208,8 @@ Window {
 
     Window {
         id: hidden_area
-        height: 100
-        width: 100
+        height: 80
+        width: 80
         visible: false
         flags: Qt.Window | Qt.FramelessWindowHint
         color: "transparent"

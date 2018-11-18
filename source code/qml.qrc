@@ -1,19 +1,22 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>MainForm.ui.qml</file>
         <file>Plan_item.qml</file>
     </qresource>
     <qresource prefix="/icon">
-        <file>search_red.png</file>
         <file>close_white.png</file>
-        <file>clock.png</file>
-        <file>clock_small.png</file>
-        <file>alarm.png</file>
+        <file>search_red.png</file>
         <file>alarm_small.png</file>
-        <file>delete.png</file>
+        <file>alarm_small_hover.png</file>
+        <file>cancle_arlarm_small.png</file>
+        <file>cancle_arlarm_small_hover.png</file>
+        <file>clock_small.png</file>
+        <file>clock_small_hover.png</file>
         <file>delete_small.png</file>
-        <file>done.png</file>
+        <file>delete_small_hover.png</file>
         <file>done_small.png</file>
+        <file>done_small_hover.png</file>
+        <file>dot_small.png</file>
+        <file>dot_small_hover.png</file>
     </qresource>
 </RCC>
