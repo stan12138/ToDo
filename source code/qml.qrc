@@ -2,7 +2,10 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Plan_item.qml</file>
-        <file>Alarm.qml</file>
+        <file>AlarmWindow.qml</file>
+        <file>DigitalWheel.qml</file>
+        <file>DigitalItem.qml</file>
+        <file>DatePicker.qml</file>
     </qresource>
     <qresource prefix="/icon">
         <file>close_white.png</file>
@@ -19,5 +22,7 @@
         <file>done_small_hover.png</file>
         <file>dot_small.png</file>
         <file>dot_small_hover.png</file>
+        <file>完成_small.png</file>
+        <file>完成_small_hover.png</file>
     </qresource>
 </RCC>

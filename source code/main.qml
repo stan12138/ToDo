@@ -208,8 +208,8 @@ Window {
 
     Window {
         id: hidden_area
-        height: 80
-        width: 80
+        height: 50
+        width: height
         visible: false
         flags: Qt.Window | Qt.FramelessWindowHint
         color: "transparent"
@@ -221,14 +221,14 @@ Window {
         }
 
         Rectangle {
-            color: "#220000ff"
+            color: "#44222222"
             anchors.fill: parent
             radius: hidden_area.width/2
 
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    root.x = Math.max(0, root.x);
+                    root.x = Math.min(Math.max(0, root.x), Screen.width-root.width);
                     root.y = Math.max(0, root.y);
                     root.show();
                     hidden_area.hide();
@@ -238,6 +238,5 @@ Window {
 
 
     }
-
 
 }

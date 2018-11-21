@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.9
 
 Rectangle {
     //每个条目的主矩形
@@ -21,7 +21,8 @@ Rectangle {
         width: parent.width-35
         height: paintedHeight+10
         text: ""
-        textMargin: 6
+        verticalAlignment: TextEdit.AlignVCenter
+        leftPadding: 6
         wrapMode: TextEdit.Wrap
         font.family: "Microsoft YaHei"
         font.pixelSize: 15
@@ -160,6 +161,20 @@ Rectangle {
             onExited: {
                 clock_img.enter_clock = false
             }
+            onClicked: {
+                if(item_mode.use_alarm)
+                {
+                    datepicker.visible=true;
+                    datepicker.requestActivate();
+                }
+            }
+        }
+    }
+
+    DatePicker {
+        id: datepicker
+        onChoose_time: {
+            console.log(year, month, day, hour, minute);
         }
     }
 }
