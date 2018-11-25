@@ -3,12 +3,12 @@ import QtQuick.Window 2.2
 
 Window {
     id: nothing
-    flags: Qt.Window | Qt.FramelessWindowHint
+    flags: Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
     color: "transparent"
     visible: false
     property alias text: message_area.text
     property alias time: window_timer.interval
-    width: 100
+    width: 200
     height: 50
 
     onActiveChanged: {
@@ -32,7 +32,7 @@ Window {
             height: 25
             readOnly: true
             text: "this is test message stan hahahahah"
-            font.family: "Consolas"
+            font.family: "Microsoft YaHei Ui"
             verticalAlignment: TextEdit.AlignVCenter
             horizontalAlignment: paintedWidth>width?TextEdit.AlignLeft:TextEdit.AlignHCenter
             clip: true
@@ -59,7 +59,7 @@ Window {
                 }
 
                 onClicked: {
-                    nothing.close()
+                    nothing.visible = false;
                 }
             }
         }
@@ -68,10 +68,13 @@ Window {
 
     Timer {
         id: window_timer
-        interval: 5000
+        interval: 30000
         repeat: false
         running: false
-        onTriggered: nothing.close()
+        onTriggered:
+        {
+            nothing.visible = false;
+        }
     }
 
 

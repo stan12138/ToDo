@@ -24,5 +24,7 @@
         <file>dot_small_hover.png</file>
         <file>完成_small.png</file>
         <file>完成_small_hover.png</file>
+        <file>close.png</file>
+        <file>close_hover.png</file>
     </qresource>
 </RCC>

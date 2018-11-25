@@ -108,12 +108,12 @@ Window {
 
     Text {
         id: hour_label
-        text: get_now_hour_string()+"时"
-        font.family: "Microsoft YaHei Ui"
-        font.pointSize: 10
-        anchors.horizontalCenter: hour_wheel.horizontalCenter
-        anchors.bottom: hour_wheel.top
-        anchors.bottomMargin: 15
+        text: get_now_hour_string()+"时";
+        font.family: "Microsoft YaHei Ui";
+        font.pointSize: 10;
+        anchors.horizontalCenter: hour_wheel.horizontalCenter;
+        anchors.bottom: hour_wheel.top;
+        anchors.bottomMargin: 15;
 
     }
 
