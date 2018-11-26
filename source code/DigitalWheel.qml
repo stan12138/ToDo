@@ -158,11 +158,11 @@ PathView {
             }
             if(wheel.angleDelta.y > 0)
             {
-                view.wheelindex++
+                view.wheelindex--
             }
             else if(wheel.angleDelta.y<0)
             {
-                view.wheelindex--
+                view.wheelindex++
             }
             if(view.wheelindex>view.model.count)
             {

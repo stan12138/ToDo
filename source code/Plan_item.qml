@@ -34,6 +34,11 @@ Rectangle {
     property bool use_alarm: false
 
 
+    Rectangle {
+        anchors.fill: plan_content
+        color: "#22222222"
+        radius: 5
+    }
     TextEdit {   //内容编辑区
         anchors.top: parent.top
         anchors.right: parent.right
@@ -44,8 +49,11 @@ Rectangle {
         verticalAlignment: TextEdit.AlignVCenter
         leftPadding: 6
         wrapMode: TextEdit.Wrap
-        font.family: "Microsoft YaHei"
-        font.pixelSize: 15
+        font.family: "Microsoft YaHei Ui"
+        font.pixelSize: 13
+        color: origin_color
+
+        property string origin_color: "black"
 
         property string old_text: plan.my_content
 
@@ -58,11 +66,6 @@ Rectangle {
             }
         }
 
-        Rectangle {
-            anchors.fill: parent
-            color: "#22222222"
-            radius: 5
-        }
     }
 
 
@@ -71,20 +74,24 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
         onEntered: {
-            marker.visible = true
+            marker.visible = true;
         }
         onExited: {
-            marker.visible = false
+            marker.visible = false;
         }
         onClicked: {
-            marker.visible = false
-            //mouse.accepted = false
+            marker.visible = false;
             if (!plan_content.activeFocus) {
                 plan_content.forceActiveFocus();
-                plan_content.cursorPosition = plan_content.text.length;
+                plan_content.cursorPosition = plan_content.positionAt(mouseX-plan_content.x, mouseY-plan_content.y);
             } else {
-                plan_content.focus = false;
+                plan_content.cursorPosition = plan_content.positionAt(mouseX-plan_content.x, mouseY-plan_content.y);
             }
+
+        }
+
+        onPositionChanged: {
+            marker.visible = true;
         }
 
 
@@ -123,7 +130,7 @@ Rectangle {
                             if(!plan.use_alarm)
                             {
                                 alarm_timer.stop();
-                                plan_content.color = "black"
+                                plan_content.color = plan_content.origin_color
                                 plan.aim_year = -1;
                                 plan.aim_month = -1;
                                 plan.aim_day = -1;
@@ -258,7 +265,7 @@ Rectangle {
     {
         plan.done = false;
         alarm_timer.start();
-        plan_content.color = "black";
+        plan_content.color = plan_content.origin_color;
         console.log("alarm begin");
     }
 

@@ -33,3 +33,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     datebackend.h \
     datamaster.h
+
+RC_ICONS = ToDo.ico

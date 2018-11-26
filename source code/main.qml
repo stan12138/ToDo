@@ -28,6 +28,7 @@ QtObject {
                 mx = mouseX
                 my = mouseY
                 move_press=true
+                focus = true;
             }
             onPositionChanged: {
                 root.x += mouseX-mx
@@ -183,6 +184,7 @@ QtObject {
                 clip: true
                 model: item_model
                 delegate: Plan_item {
+                    id: plan_delegate
                     width: parent.width
                     my_order: item_order
                     my_content: item_content
@@ -217,11 +219,14 @@ QtObject {
                         main_alarm_window.visible = true;
                         main_alarm_window.text = content;
                     }
+
+//                    list_blank.clicked.connect(plan_content_lose_focus);
                 }
 
                 MouseArea {
                     //清单区空白位置的鼠标区，点击之后增加新的清单项
                     z: -1
+                    id: mo
                     anchors.fill: parent
                     onClicked: {
                         if(list_rect.could_add_another_plan)
@@ -231,10 +236,14 @@ QtObject {
                             var data = [root.current_order, "", 0, -1, -1, -1 ,-1 ,-1];
                             database.insert(data);
                             root.current_order += 1;
+
                         }
+                        focus = true;
 
                     }
+//
                 }
+
             }
 
 
@@ -257,6 +266,7 @@ QtObject {
                     database.insert(data);
                     root.current_order += 1;
                 }
+                focus = true;
             }
         }
 
